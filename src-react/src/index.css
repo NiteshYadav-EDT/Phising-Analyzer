@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 4%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 4%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 6% 10%;
+
+    --secondary: 240 5% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 5% 15%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 240 5% 15%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 6% 15%;
+    --input: 240 6% 15%;
+    --ring: 240 5% 65%;
+
+    --radius: 0.75rem;
+
+    --surface: 240 6% 10%;
+    
+    /* Cyber Theme Custom Variables */
+    --cyber: #0aefff;
+    --cyber-glow: #0088ff;
+    --success: #00ff94;
+    --danger: #ff3366;
+    --warning: #ffbd2e;
+  }
+
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(10, 239, 255, 0.2) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: rgba(10, 239, 255, 0.2);
+    border-radius: 3px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  ::selection {
+    background-color: rgba(10, 239, 255, 0.3);
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-surface/40 backdrop-blur-md border border-border/50;
+  }
+
+  .glass-strong {
+    @apply bg-background/80 backdrop-blur-xl border border-border/50;
+  }
+
+  .text-gradient-cyber {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[var(--cyber)] to-[var(--cyber-glow)];
+  }
+
+  .glow-cyber {
+    box-shadow: 0 0 20px rgba(10, 239, 255, 0.2), inset 0 0 10px rgba(10, 239, 255, 0.1);
+  }
+
+  .cyber-grid {
+    background-image: 
+      linear-gradient(to right, rgba(10, 239, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(10, 239, 255, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at center, black, transparent 80%);
+  }
+
+  .noise {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    opacity: 0.03;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  .radar-sweep {
+    border-radius: 50%;
+    animation: radar-sweep 4s linear infinite;
+  }
+}
+
+@keyframes radar-sweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cursor-blink::after {
+  content: '▋';
+  animation: blink 1s step-end infinite;
+  color: var(--cyber);
+  margin-left: 4px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}

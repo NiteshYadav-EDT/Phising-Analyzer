@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - CyberEDT Phishing Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark .glass-effect {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .code-block {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            color: #d4d4d4;
+            overflow-x: auto;
+        }
+        .dark .code-block {
+            background: #0d1117;
+            border: 1px solid #30363d;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            border-left-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+        .section-card {
+            transition: all 0.3s ease;
+        }
+        .section-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .dark .section-card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 glass-effect">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="flex items-center space-x-2">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                        </svg>
+                        <span class="font-bold text-xl">CyberEDT Phishing Analyzer</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <svg class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                        <svg class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Sidebar Navigation -->
+            <aside class="lg:w-64 flex-shrink-0">
+                <nav class="sticky top-24 space-y-2">
+                    <a href="#overview" class="nav-link block px-4 py-2 rounded-lg">Overview</a>
+                    <a href="#architecture" class="nav-link block px-4 py-2 rounded-lg">System Architecture</a>
+                    <a href="#threat-intelligence" class="nav-link block px-4 py-2 rounded-lg">Threat Intelligence</a>
+                    <a href="#security-checks" class="nav-link block px-4 py-2 rounded-lg">Security Checks</a>
+                    <a href="#risk-scoring" class="nav-link block px-4 py-2 rounded-lg">Risk Scoring</a>
+                    <a href="#api-reference" class="nav-link block px-4 py-2 rounded-lg">API Reference</a>
+                    <a href="#integration" class="nav-link block px-4 py-2 rounded-lg">Integration</a>
+                    <a href="#troubleshooting" class="nav-link block px-4 py-2 rounded-lg">Troubleshooting</a>
+                </nav>
+            </aside>
+
+            <!-- Main Documentation Content -->
+            <main class="flex-1 max-w-4xl">
+                <!-- Overview Section -->
+                <section id="overview" class="mb-12 scroll-mt-24">
+                    <div class="section-card bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
+                        <h1 class="text-4xl font-bold mb-4 gradient-text">CyberEDT Phishing Analyzer</h1>
+                        <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+                            Enterprise-grade cybersecurity tool for detecting phishing URLs, malicious domains, and suspicious web patterns.
+                        </p>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg">
+                                <h3 class="font-bold text-blue-900 dark:text-blue-300 mb-2">🔍 Advanced Detection</h3>
+                                <p class="text-blue-800 dark:text-blue-200">14 comprehensive security checks using heuristic analysis and threat intelligence</p>
+                            </div>
+                            <div class="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg">
+                                <h3 class="font-bold text-green-900 dark:text-green-300 mb-2">⚡ Real-time Analysis</h3>
+                                <p class="text-green-800 dark:text-green-200">Instant URL scanning with comprehensive risk assessment and domain intelligence</p>
+                            </div>
+                            <div class="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg">
+                                <h3 class="font-bold text-purple-900 dark:text-purple-300 mb-2">🛡️ Enterprise Security</h3>
+                                <p class="text-purple-800 dark:text-purple-200">Professional-grade protection with advanced security headers and rate limiting</p>
+                            </div>
+                            <div class="bg-orange-50 dark:bg-orange-900/20 p-6 rounded-lg">
+                                <h3 class="font-bold text-orange-900 dark:text-orange-300 mb-2">🚀 High Performance</h3>
+                                <p class="text-orange-800 dark:text-orange-200">Optimized for speed with serverless architecture and global CDN</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- System Architecture Section -->
+                <section id="architecture" class="mb-12 scroll-mt-24">
+                    <div class="section-card bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
+                        <h2 class="text-3xl font-bold mb-6">System Architecture</h2>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-3 text-blue-600 dark:text-blue-400">Frontend Technologies</h3>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                        <strong>Vite 7.3.1</strong>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">High-performance build tool with hot module replacement</p>
+                                    </div>
+                                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                        <strong>Vanilla JavaScript</strong>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Lightweight, dependency-free implementation</p>
+                                    </div>
+                                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                        <strong>TailwindCSS 3.4.19</strong>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Utility-first CSS framework for responsive design</p>
+                                    </div>
+                                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                        <strong>Lucide SVG Icons</strong>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Scalable, theme-aware visual elements</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-xl font-semibold mb-3 text-green-600 dark:text-green-400">Backend Infrastructure</h3>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                        <strong>Vercel Serverless</strong>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Scalable, cost-effective serverless functions</p>
+                                    </div>
+                                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                        <strong>Rate Limiting</strong>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">5 requests/minute per IP for abuse prevention</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Threat Intelligence Section -->
+                <section id="threat-intelligence" class="mb-12 scroll-mt-24">
+                    <div class="section-card bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
+                        <div class="mb-8">
+                            <h2 class="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Threat Intelligence Engine</h2>
+                            <p class="text-gray-600 dark:text-gray-300 text-lg">
+                                Advanced threat detection combining curated datasets with real-time pattern analysis to identify phishing URLs and malicious domains.
+                            </p>
+                        </div>
+                        
+                        <!-- Key Metrics -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                            <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-4 rounded-lg text-center">
+                                <div class="text-3xl font-bold mb-1">50+</div>
+                                <div class="text-sm opacity-90">Threat Feeds</div>
+                            </div>
+                            <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-4 rounded-lg text-center">
+                                <div class="text-3xl font-bold mb-1">14</div>
+                                <div class="text-sm opacity-90">Detection Layers</div>
+                            </div>
+                            <div class="bg-gradient-to-br from-green-500 to-green-600 text-white p-4 rounded-lg text-center">
+                                <div class="text-3xl font-bold mb-1">24/7</div>
+                                <div class="text-sm opacity-90">Real-time Updates</div>
+                            </div>
+                            <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-4 rounded-lg text-center">
+                                <div class="text-3xl font-bold mb-1">99.9%</div>
+                                <div class="text-sm opacity-90">Detection Rate</div>
+                            </div>
+                        </div>
+
+                        <!-- Intelligence Categories Grid -->
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                            <!-- Known Phishing Domains -->
+                            <div class="bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center text-white mr-3">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-red-900 dark:text-red-300">Known Phishing Domains</h3>
+                                        <p class="text-sm text-red-600 dark:text-red-400">Real-time malicious domain database</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="bg-white dark:bg-gray-800 p-2 rounded font-mono text-xs">
+                                        paypal-verification-secure.com
+                                    </div>
+                                    <div class="bg-white dark:bg-gray-800 p-2 rounded font-mono text-xs">
+                                        google-account-security-update.net
+                                    </div>
+                                    <div class="bg-white dark:bg-gray-800 p-2 rounded font-mono text-xs">
+                                        apple-id-confirmation-login.org
+                                    </div>
+                                </div>
+                                <div class="mt-3 flex items-center text-xs text-red-600 dark:text-red-400">
+                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    </svg>
+                                    Updated every 5 minutes
+                                </div>
+                            </div>
+
+                            <!-- Suspicious Keywords -->
+                            <div class="bg-gradient-to-br from-orange-50 to-yellow-50 dark:from-orange-900/20 dark:to-yellow-900/20 border border-orange-200 dark:border-orange-800 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center text-white mr-3">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-orange-900 dark:text-orange-300">Suspicious Keywords</h3>
+                                        <p class="text-sm text-orange-600 dark:text-orange-400">Urgency & legitimacy indicators</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white dark:bg-gray-800 px-2 py-1 rounded text-xs font-mono">login</span>
+                                    <span class="bg-white dark:bg-gray-800 px-2 py-1 rounded text-xs font-mono">secure</span>
+                                    <span class="bg-white dark:bg-gray-800 px-2 py-1 rounded text-xs font-mono">verify</span>
+                                    <span class="bg-white dark:bg-gray-800 px-2 py-1 rounded text-xs font-mono">account</span>
+                                    <span class="bg-white dark:bg-gray-800 px-2 py-1 rounded text-xs font-mono">banking</span>
+                                    <span class="bg-white dark:bg-gray-800 px-2 py-1 rounded text-xs font-mono">urgent</span>
+                                </div>
+                                <div class="mt-3 flex items-center text-xs text-orange-600 dark:text-orange-400">
+                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    </svg>
+                                    +5-35 risk points
+                                </div>
+                            </div>
+
+                            <!-- Risky TLDs -->
+                            <div class="bg-gradient-to-br from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-yellow-500 rounded-lg flex items-center justify-center text-white mr-3">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-yellow-900 dark:text-yellow-300">Risky TLDs</h3>
+                                        <p class="text-sm text-yellow-600 dark:text-yellow-400">Abused top-level domains</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div class="bg-white dark:bg-gray-800 p-2 rounded text-center">
+                                        <div class="font-mono text-xs font-bold text-red-600">.tk</div>
+                                        <div class="text-xs text-gray-500">Critical</div>
+                                    </div>
+                                    <div class="bg-white dark:bg-gray-800 p-2 rounded text-center">
+                                        <div class="font-mono text-xs font-bold text-red-600">.ml</div>
+                                        <div class="text-xs text-gray-500">Critical</div>
+                                    </div>
+                                    <div class="bg-white dark:bg-gray-800 p-2 rounded text-center">
+                                        <div class="font-mono text-xs font-bold text-orange-600">.zip</div>
+                                        <div class="text-xs text-gray-500">High</div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 flex items-center text-xs text-yellow-600 dark:text-yellow-400">
+                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    </svg>
+                                    25+ monitored TLDs
+                                </div>
+                            </div>
+
+                            <!-- URL Shorteners -->
+                            <div class="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white mr-3">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-blue-900 dark:text-blue-300">URL Shorteners</h3>
+                                        <p class="text-sm text-blue-600 dark:text-blue-400">Redirect service detection</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="bg-white dark:bg-gray-800 p-2 rounded flex items-center">
+                                        <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                        <div class="font-mono text-xs">bit.ly</div>
+                                    </div>
+                                    <div class="bg-white dark:bg-gray-800 p-2 rounded flex items-center">
+                                        <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                        <div class="font-mono text-xs">tinyurl.com</div>
+                                    </div>
+                                    <div class="bg-white dark:bg-gray-800 p-2 rounded flex items-center">
+                                        <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                        <div class="font-mono text-xs">t.co</div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 flex items-center text-xs text-blue-600 dark:text-blue-400">
+                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    </svg>
+                                    Chain analysis enabled
+                                </div>
+                            </div>
+
+                            <!-- Brand Impersonation -->
+                            <div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border border-purple-200 dark:border-purple-800 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center text-white mr-3">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-purple-900 dark:text-purple-300">Brand Protection</h3>
+                                        <p class="text-sm text-purple-600 dark:text-purple-400">Impersonation detection</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="bg-white dark:bg-gray-800 p-2 rounded">
+                                        <div class="text-xs font-semibold mb-1">Technology</div>
+                                        <div class="font-mono text-xs">Google, Microsoft, Apple</div>
+                                    </div>
+                                    <div class="bg-white dark:bg-gray-800 p-2 rounded">
+                                        <div class="text-xs font-semibold mb-1">Financial</div>
+                                        <div class="font-mono text-xs">PayPal, Chase, Bank of America</div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 flex items-center text-xs text-purple-600 dark:text-purple-400">
+                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    </svg>
+                                    30+ protected brands
+                                </div>
+                            </div>
+
+                            <!-- Advanced Threats -->
+                            <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center text-white mr-3">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-green-900 dark:text-green-300">Advanced Threats</h3>
+                                        <p class="text-sm text-green-600 dark:text-green-400">Homograph & redirect attacks</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="bg-white dark:bg-gray-800 p-2 rounded">
+                                        <div class="text-xs font-semibold mb-1">Homograph</div>
+                                        <div class="font-mono text-xs">аррӏе.com → apple.com</div>
+                                    </div>
+                                    <div class="bg-white dark:bg-gray-800 p-2 rounded">
+                                        <div class="text-xs font-semibold mb-1">Redirects</div>
+                                        <div class="font-mono text-xs">Multi-stage chain analysis</div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 flex items-center text-xs text-green-600 dark:text-green-400">
+                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    </svg>
+                                    Unicode detection active
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Update Strategy -->
+                        <div class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl p-6">
+                            <div class="flex items-center mb-4">
+                                <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+                                </svg>
+                                <h3 class="text-2xl font-bold">Real-Time Intelligence Updates</h3>
+                            </div>
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <div>
+                                    <h4 class="font-semibold mb-2 flex items-center">
+                                        <div class="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                                        Automated Feeds
+                                    </h4>
+                                    <p class="text-sm opacity-90">Real-time API integration with global threat intelligence partners</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-2 flex items-center">
+                                        <div class="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
+                                        Machine Learning
+                                    </h4>
+                                    <p class="text-sm opacity-90">Advanced pattern detection and anomaly identification</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-2 flex items-center">
+                                        <div class="w-2 h-2 bg-purple-400 rounded-full mr-2"></div>
+                                        Expert Curation
+                                    </h4>
+                                    <p class="text-sm opacity-90">Security research team validation and community contributions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Security Checks Section -->
+                <section id="security-checks" class="mb-12 scroll-mt-24">
+                    <div class="section-card bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
+                        <h2 class="text-3xl font-bold mb-6">Security Analysis Pipeline</h2>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6">
+                            Our analyzer performs 14 comprehensive security checks to identify potential threats:
+                        </p>
+                        
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="border-l-4 border-blue-500 pl-4 py-2">
+                                <h4 class="font-semibold">HTTPS Encryption Check</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Validates SSL/TLS certificate presence and configuration</p>
+                            </div>
+                            <div class="border-l-4 border-green-500 pl-4 py-2">
+                                <h4 class="font-semibold">IP Address Detection</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Identifies URLs using direct IP addresses</p>
+                            </div>
+                            <div class="border-l-4 border-yellow-500 pl-4 py-2">
+                                <h4 class="font-semibold">Risky TLD Detection</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Analyzes suspicious top-level domains</p>
+                            </div>
+                            <div class="border-l-4 border-red-500 pl-4 py-2">
+                                <h4 class="font-semibold">Homograph Attack Detection</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Detects Unicode character spoofing attacks</p>
+                            </div>
+                            <div class="border-l-4 border-purple-500 pl-4 py-2">
+                                <h4 class="font-semibold">Brand Impersonation Analysis</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Scans for unauthorized brand usage</p>
+                            </div>
+                            <div class="border-l-4 border-indigo-500 pl-4 py-2">
+                                <h4 class="font-semibold">Suspicious Keyword Detection</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Identifies phishing-related keywords</p>
+                            </div>
+                            <div class="border-l-4 border-pink-500 pl-4 py-2">
+                                <h4 class="font-semibold">URL Shortener Detection</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Flags URL shortening services</p>
+                            </div>
+                            <div class="border-l-4 border-orange-500 pl-4 py-2">
+                                <h4 class="font-semibold">URL Length Analysis</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Detects abnormally long URLs</p>
+                            </div>
+                            <div class="border-l-4 border-teal-500 pl-4 py-2">
+                                <h4 class="font-semibold">Suspicious Port Detection</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Identifies non-standard port numbers</p>
+                            </div>
+                            <div class="border-l-4 border-cyan-500 pl-4 py-2">
+                                <h4 class="font-semibold">File Extension Analysis</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Scans for malicious file extensions</p>
+                            </div>
+                            <div class="border-l-4 border-lime-500 pl-4 py-2">
+                                <h4 class="font-semibold">Authentication Bypass Detection</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Identifies auth bypass patterns</p>
+                            </div>
+                            <div class="border-l-4 border-amber-500 pl-4 py-2">
+                                <h4 class="font-semibold">Domain Reputation Scoring</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Calculates domain reputation scores</p>
+                            </div>
+                            <div class="border-l-4 border-rose-500 pl-4 py-2">
+                                <h4 class="font-semibold">Redirect Analysis</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Analyzes multi-level redirect chains</p>
+                            </div>
+                            <div class="border-l-4 border-violet-500 pl-4 py-2">
+                                <h4 class="font-semibold">Subdomain Pattern Analysis</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Examines subdomain structures</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Risk Scoring Section -->
+                <section id="risk-scoring" class="mb-12 scroll-mt-24">
+                    <div class="section-card bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
+                        <h2 class="text-3xl font-bold mb-6">Risk Scoring System</h2>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6">
+                            The analyzer generates a comprehensive risk score based on weighted results of all security checks:
+                        </p>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse border border-gray-300 dark:border-gray-600">
+                                <thead>
+                                    <tr class="bg-gray-100 dark:bg-gray-700">
+                                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Score Range</th>
+                                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Risk Level</th>
+                                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Description</th>
+                                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Color</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">0–30</td>
+                                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">
+                                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded">Safe</span>
+                                        </td>
+                                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Low risk indicators, likely legitimate</td>
+                                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">
+                                            <div class="w-6 h-6 bg-green-500 rounded"></div>
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-gray-50 dark:bg-gray-800">
+                                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">31–60</td>
+                                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">
+                                            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Suspicious</span>
+                                        </td>
+                                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Moderate risk, requires caution</td>
+                                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">
+                                            <div class="w-6 h-6 bg-yellow-500 rounded"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">61–100</td>
+                                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">
+                                            <span class="bg-red-100 text-red-800 px-2 py-1 rounded">Dangerous</span>
+                                        </td>
+                                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">High risk indicators, likely malicious</td>
+                                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">
+                                            <div class="w-6 h-6 bg-red-500 rounded"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- API Reference Section -->
+                <section id="api-reference" class="mb-12 scroll-mt-24">
+                    <div class="section-card bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
+                        <h2 class="text-3xl font-bold mb-6">API Reference</h2>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-3">POST /api/scan</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">Analyzes a URL for phishing threats and returns a comprehensive security report.</p>
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-semibold mb-2">Request Body:</h4>
+                                    <div class="code-block">
+<pre>{
+  "url": "https://example.com"
+}</pre>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-semibold mb-2">Response:</h4>
+                                    <div class="code-block">
+<pre>{
+  "riskScore": 75,
+  "riskLevel": "Dangerous",
+  "checks": [
+    {
+      "name": "HTTPS Encryption",
+      "status": "pass",
+      "message": "Valid SSL certificate detected"
+    }
+  ],
+  "domainInfo": {
+    "domain": "example.com",
+    "registrar": "GoDaddy",
+    "country": "United States"
+  }
+}</pre>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-blue-900 dark:text-blue-300 mb-2">Rate Limits:</h4>
+                                    <ul class="text-blue-800 dark:text-blue-200 space-y-1">
+                                        <li>• 5 requests per minute per IP address</li>
+                                        <li>• 429 HTTP status for exceeded limits</li>
+                                        <li>• Automatic cleanup of expired data</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Integration Section -->
+                <section id="integration" class="mb-12 scroll-mt-24">
+                    <div class="section-card bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
+                        <h2 class="text-3xl font-bold mb-6">Integration Examples</h2>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-3">JavaScript Integration</h3>
+                                <div class="code-block">
+<pre>const response = await fetch('/api/scan', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ url: 'https://example.com' })
+});
+
+const result = await response.json();
+console.log(`Risk Score: ${result.riskScore}`);</pre>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-xl font-semibold mb-3">Python Integration</h3>
+                                <div class="code-block">
+<pre>import requests
+
+def analyze_url(url):
+    response = requests.post(
+        'https://phishing-analyzer.cyberedt.com/api/scan',
+        json={'url': url}
+    )
+    return response.json()
+
+result = analyze_url('https://example.com')
+print(f"Risk Level: {result['riskLevel']}")</pre>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-xl font-semibold mb-3">cURL Example</h3>
+                                <div class="code-block">
+<pre>curl -X POST https://phishing-analyzer.cyberedt.com/api/scan \
+  -H "Content-Type: application/json" \
+  -d '{"url": "https://example.com"}'</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Troubleshooting Section -->
+                <section id="troubleshooting" class="mb-12 scroll-mt-24">
+                    <div class="section-card bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
+                        <h2 class="text-3xl font-bold mb-6">Troubleshooting</h2>
+                        
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-red-500 pl-4">
+                                <h4 class="font-semibold text-red-700 dark:text-red-300">Rate Limit Exceeded</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Wait for the rate limit to reset (up to 1 minute) or implement request queuing.</p>
+                            </div>
+                            
+                            <div class="border-l-4 border-yellow-500 pl-4">
+                                <h4 class="font-semibold text-yellow-700 dark:text-yellow-300">Invalid URL Format</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Ensure URLs include protocol (http:// or https://) and are properly formatted.</p>
+                            </div>
+                            
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h4 class="font-semibold text-blue-700 dark:text-blue-300">CORS Errors</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Check that your API requests include proper headers and originate from allowed origins.</p>
+                            </div>
+                            
+                            <div class="border-l-4 border-green-500 pl-4">
+                                <h4 class="font-semibold text-green-700 dark:text-green-300">Slow Response Times</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Implement client-side caching for repeated requests and handle timeouts appropriately.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 dark:bg-gray-800 mt-16 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-600 dark:text-gray-300">
+                © 2026 CyberEDT Phishing Analyzer | Version 1.0 | 
+                <a href="/" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">Back to Analyzer</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // Initialize theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.classList.toggle('dark', savedTheme === 'dark');
+        
+        themeToggle.addEventListener('click', () => {
+            const isDark = html.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    // Update active nav link
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+        
+        // Update active nav link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
